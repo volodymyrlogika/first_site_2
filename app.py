@@ -1,11 +1,14 @@
 from flask import Flask, render_template
 
+from db_scripts import DatabaseManager
 
 app = Flask(__name__)  # Створюємо веб–додаток Flask
+db = DatabaseManager("blog.db")
 
 @app.route("/")  # Вказуємо url-адресу для виклику функції
 def index():
-    return render_template("index.html")  # html-сторінка, що повертається у браузер
+    articles = db.get_all_articles()
+    return render_template("index.html", articles=articles)  # html-сторінка, що повертається у браузер
 
 @app.route("/logika")  # Вказуємо url-адресу для виклику функції
 def logika():
