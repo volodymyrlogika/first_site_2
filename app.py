@@ -10,9 +10,11 @@ def index():
     articles = db.get_all_articles()
     return render_template("index.html", articles=articles)  # html-сторінка, що повертається у браузер
 
-@app.route("/logika")  # Вказуємо url-адресу для виклику функції
-def logika():
-    return render_template("logika.html")  # html-сторінка, що повертається у браузер
+
+@app.route("/articles/<int:article_id>")  # Вказуємо url-адресу для виклику функції
+def article_page(article_id):
+    article = db.get_article(article_id)
+    return render_template("article_page.html", article=article)  # html-сторінка, що повертається у браузер
 
 
 if __name__ == "__main__":

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+  <main class="container">
+    <h1 class="mt-5">{{article[1]}}</h1>
+    <small>Опубліковано: {{article[4]}}</small>
+    <img src="{{ url_for('static', filename='img/'+article[3]) }}" class="img-fluid my-3" alt="...">
+    <p>{{article[2]}}</p>
+    
+  </main>
+{% endblock content %}
