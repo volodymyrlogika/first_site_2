@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+
+{% block title %}
+    <title>{{article[1]}} - LogikaBlog</title>
+{% endblock title %}
+
 {% block content %}
   <main class="container">
     <h1 class="mt-5">{{article[1]}}</h1>

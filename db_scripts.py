@@ -27,3 +27,18 @@ class DatabaseManager:
         data = self.cursor.fetchone()
         self.close()
         return data
+
+    def get_all_categories(self):
+        self.open()
+        self.cursor.execute("""SELECT * FROM categories""")
+        data = self.cursor.fetchall()
+        self.close()
+        return data
+    
+    def get_category_articles(self, category_id):
+        self.open()
+        self.cursor.execute("""SELECT * FROM articles WHERE category_id=?""", [category_id])
+        data = self.cursor.fetchall()
+        self.close()
+        return data
+    
