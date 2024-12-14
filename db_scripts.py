@@ -42,3 +42,6 @@ class DatabaseManager:
         self.close()
         return data
     
+
+    def add_article(self, title, content, image, user_id, category_id):
+        ...

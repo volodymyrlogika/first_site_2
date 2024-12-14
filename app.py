@@ -28,6 +28,12 @@ def category_page(category_id):
     return render_template("index.html", articles=articles)  # html-сторінка, що повертається у браузер
 
 
+@app.route("/articles/new", methods=["GET", "POST"])
+def new_article():
+    
+    return render_template("new_article.html") 
+
+
 if __name__ == "__main__":
     app.config['TEMPLATES_AUTO_RELOAD'] = True  # автоматичне оновлення шаблонів
     app.run(debug=True)  # Запускаємо веб-сервер з цього файлу в режимі налагодження
