@@ -21,7 +21,7 @@
             <label for="formFile" class="form-label">Прикріпіть зображення для статті</label>
             <input required name="image" class="form-control" type="file" id="formFile">
         </div>
-        <select class="form-select" aria-label="Default select example">
+        <select required name="category"  class="form-select" aria-label="Default select example">
             <option selected>Виберіть категорію</option>
             {% for category in categories %}
                 <option value="{{category[0]}}">{{category[1]}}</option>

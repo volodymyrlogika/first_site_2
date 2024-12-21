@@ -44,4 +44,9 @@ class DatabaseManager:
     
 
     def add_article(self, title, content, image, user_id, category_id):
-        ...
+        self.open()
+        self.cursor.execute("""INSERT INTO articles(title, content, image, user_id, category_id)
+                            VALUES(?,?,?,?,?)""", [title, content, image, user_id, int(category_id)])
+        self.conn.commit()
+        self.close()
+        return 
