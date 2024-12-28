@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from dotenv import load_dotenv
 load_dotenv() #завантажуємо змінні середовища з .env
 import os
@@ -37,11 +37,26 @@ def category_page(category_id):
 @app.route("/articles/new", methods=["GET", "POST"])
 def new_article():
     if request.method == 'POST': #якщо користувач надсилає форму з постом
-        image = request.files['image'] #отримуємо файл картинки
-        image.save(IMG_PATH + image.filename)
-        db.add_article(request.form['title'], request.form['content'], 
-                       image.filename, 1, request.form['category'])
+        if request.form['category'] != 'Виберіть категорію':
+            image = request.files['image'] #отримуємо файл картинки
+            image.save(IMG_PATH + image.filename)
+            db.add_article(request.form['title'], request.form['content'], 
+                        image.filename, 1, request.form['category'])
+            flash("Статтю додано", "alert-success")
+        else:
+            flash("Виберіть категорію і заповніть всі поля.", "alert-warning")
     return render_template("new_article.html") 
+
+
+@app.route("/search")  # Вказуємо url-адресу для виклику функції
+def search():
+    articles = db.get_all_articles()
+
+    if request.method == 'GET':
+        query = request.args.get("query")
+        articles = db.search_article(query)
+
+    return render_template("index.html", articles=articles)  # html-сторінка, що повертається у браузер
 
 
 if __name__ == "__main__":

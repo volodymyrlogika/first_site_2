@@ -50,3 +50,11 @@ class DatabaseManager:
         self.conn.commit()
         self.close()
         return 
+
+    def search_article(self, query):
+        self.open()
+        query = '%' + query + '%'
+        self.cursor.execute("""SELECT * FROM articles WHERE (title LIKE ? OR content LIKE ?)""", [query, query])
+        data = self.cursor.fetchall()
+        self.close()
+        return data
